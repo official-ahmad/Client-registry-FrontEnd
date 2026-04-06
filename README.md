@@ -60,6 +60,7 @@ src/
 ## 🎯 Pages
 
 ### 1. Dashboard (`/dashboard`)
+
 - View all jobs in a sortable table
 - Search by customer name, IMEI, or Job ID
 - Color-coded status badges:
@@ -71,6 +72,7 @@ src/
 - Real-time statistics
 
 ### 2. Add Job (`/add`)
+
 - Customer Name (required)
 - Phone Number (required)
 - Device Model (required)
@@ -81,6 +83,7 @@ src/
 - Auto-redirect to dashboard on success
 
 ### 3. Settings (`/settings`)
+
 - Business information
 - API configuration
 - Theme settings
@@ -88,9 +91,10 @@ src/
 
 ## 🔌 API Integration
 
-Backend API URL: `http://localhost:8000/api`
+Backend API URL: `https://client-registry-backend.onrender.com//api`
 
 **Endpoints:**
+
 - `POST /jobs` - Create new job
 - `GET /jobs` - Get all jobs
 - `PATCH /jobs/:id` - Update job
@@ -110,7 +114,7 @@ Backend API URL: `http://localhost:8000/api`
 The backend URL is configured in `src/api.js`:
 
 ```javascript
-const API_URL = 'http://localhost:8000/api';
+const API_URL = "https://client-registry-backend.onrender.com//api";
 ```
 
 Update this if your backend runs on a different port.
@@ -125,6 +129,7 @@ Update this if your backend runs on a different port.
 ## 🎉 Toast Notifications
 
 Success and error messages appear as toast notifications:
+
 - ✅ Green for success (job created, status updated)
 - ❌ Red for errors (validation, API failures)
 - Position: Top-right
@@ -134,6 +139,7 @@ Success and error messages appear as toast notifications:
 ## 🔍 Search
 
 Real-time search across:
+
 - Customer names (case-insensitive)
 - IMEI numbers
 - Job IDs
@@ -141,6 +147,7 @@ Real-time search across:
 ## 📊 Statistics
 
 The dashboard shows:
+
 - Total jobs count
 - Jobs by status (Received, In-Progress, Ready, Delivered)
 - Real-time updates
@@ -162,6 +169,7 @@ The dashboard shows:
 ## 🛠️ Development
 
 Built with:
+
 - Vite for fast development
 - ESLint for code quality
 - Tailwind CSS v4 for styling
