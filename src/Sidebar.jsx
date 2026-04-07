@@ -160,7 +160,7 @@ const Sidebar = () => {
               <h1 className={`text-lg font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
                 Official-Ahmad
               </h1>
-              <p className={`text-xs ${isDark ? "text-gray-400" : "text-slate-500"}`}>Mobile Unlocking</p>
+              <p className={`text-xs ${isDark ? "text-gray-400" : "text-slate-500"}`}>Digital Services</p>
             </div>
           </div>
           <button
@@ -206,7 +206,7 @@ const Sidebar = () => {
               <h1 className={`text-xl font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
                 Official-Ahmad
               </h1>
-              <p className={`text-xs ${isDark ? "text-gray-400" : "text-slate-500"}`}>Mobile Unlocking</p>
+              <p className={`text-xs ${isDark ? "text-gray-400" : "text-slate-500"}`}>Digital Services</p>
             </div>
           </div>
         </div>

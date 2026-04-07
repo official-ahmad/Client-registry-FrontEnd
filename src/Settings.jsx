@@ -23,7 +23,7 @@ const Settings = () => {
                   </label>
                   <input
                     type="text"
-                    value="Official-Ahmad Mobile Unlocking"
+                    value="Official-Ahmad Digital Services"
                     readOnly
                     className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white"
                   />
@@ -107,7 +107,7 @@ const Settings = () => {
                   Official-Ahmad
                 </p>
                 <p className="text-sm text-gray-400 mt-2">
-                  Mobile Unlocking Service Management System
+                  Digital Service Management System
                 </p>
               </div>
             </div>

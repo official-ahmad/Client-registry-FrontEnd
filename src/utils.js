@@ -16,7 +16,7 @@ export const sendWhatsApp = (phone, message) => {
 };
 
 export const formatWhatsAppMessage = (job) => {
-  return `*Official-Ahmad Mobile Unlocking*
+  return `*Official-Ahmad Digital Services*
 
 Dear ${job.customerName},
 
@@ -207,7 +207,7 @@ const getReceiptHTML = (job, forPrint = false) => {
   <div class="receipt">
     <div class="header">
       <div class="logo">⚙️ OFFICIAL-AHMAD</div>
-      <div class="subtitle">Mobile Unlocking Service</div>
+      <div class="subtitle">Digital Services</div>
       <div class="subtitle">Professional & Reliable</div>
       <div class="job-id">${job.jobId}</div>
     </div>

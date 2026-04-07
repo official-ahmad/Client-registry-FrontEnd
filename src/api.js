@@ -1,4 +1,4 @@
-// API Service for Mobile Unlocking Dashboard
+
 import axios from "axios";
 
 const API_URL = "https://client-registry-backend.onrender.com/api";

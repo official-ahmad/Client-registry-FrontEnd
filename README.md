@@ -1,6 +1,6 @@
 # Client Registry - Admin Dashboard
 
-A professional, responsive admin dashboard built with React, Tailwind CSS, and Axios for managing mobile unlocking services.
+A professional, responsive admin dashboard built with React, Tailwind CSS, and Axios for managing Digital services.
 
 ## 🎨 Features
 
