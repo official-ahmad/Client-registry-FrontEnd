@@ -63,7 +63,7 @@ const Settings = () => {
                   </label>
                   <input
                     type="text"
-                    value="https://client-registry-backend.onrender.com//api"
+                    value="https://client-registry-backend.onrender.com/api"
                     readOnly
                     className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-white font-mono"
                   />
