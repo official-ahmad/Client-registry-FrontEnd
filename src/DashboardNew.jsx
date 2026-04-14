@@ -373,10 +373,10 @@ const Dashboard = () => {
         </div>
 
         {/* Jobs Table */}
-        <div className="md:hidden space-y-3 mb-6">
+        <div className="2xl:hidden grid grid-cols-1 lg:grid-cols-2 gap-3 mb-6">
           {filteredJobs.length === 0 ? (
             <div
-              className={`rounded-xl border p-6 text-center ${
+              className={`rounded-xl border p-6 text-center lg:col-span-2 ${
                 isDark
                   ? "bg-gray-900/50 border-gray-700 text-gray-500"
                   : "bg-white/80 border-gray-200 text-gray-500"
@@ -501,7 +501,7 @@ const Dashboard = () => {
         </div>
 
         <div
-          className={`hidden md:block rounded-xl shadow-lg border overflow-hidden ${
+          className={`hidden 2xl:block rounded-xl shadow-lg border overflow-hidden ${
             isDark
               ? "bg-gray-900/50 border-gray-700"
               : "bg-white/80 border-gray-200"

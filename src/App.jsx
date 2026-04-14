@@ -14,19 +14,21 @@ import Revenue from "./Revenue";
 
 function AppContent() {
   const { isDark } = useTheme();
-  
+
   return (
     <Router>
-      <div className={`flex min-h-screen transition-colors duration-200 ${
-        isDark 
-          ? "bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950" 
-          : "bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-100"
-      }`}>
+      <div
+        className={`flex min-h-screen overflow-x-hidden transition-colors duration-200 ${
+          isDark
+            ? "bg-gradient-to-br from-gray-950 via-gray-900 to-gray-950"
+            : "bg-gradient-to-br from-slate-50 via-blue-50/30 to-slate-100"
+        }`}
+      >
         {/* Sidebar */}
         <Sidebar />
 
         {/* Main Content */}
-        <div className="flex-1 lg:ml-64 pt-16 lg:pt-0">
+        <div className="flex-1 min-w-0 lg:ml-64 pt-16 lg:pt-0">
           <Routes>
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
             <Route path="/dashboard" element={<Dashboard />} />
