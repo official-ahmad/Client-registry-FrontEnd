@@ -3,8 +3,15 @@
 export const getServiceLabel = (job) => {
   if (!job) return "N/A";
 
+  const customService =
+    typeof job.customService === "string" ? job.customService.trim() : "";
+
   if (job.serviceType === "Other") {
-    return job.customService?.trim() || "Other";
+    return customService || "Other";
+  }
+
+  if (!job.serviceType && customService) {
+    return customService;
   }
 
   return job.serviceType || "N/A";

@@ -28,14 +28,8 @@ const PAYMENT_STATUS_OPTIONS = ["Pending", "Paid"];
 
 // Icons
 const WhatsAppIcon = () => (
-  <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
-  </svg>
-);
-
-const ViewIcon = () => (
   <svg
-    className="h-5 w-5"
+    className="h-4 w-4"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -43,13 +37,29 @@ const ViewIcon = () => (
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeWidth={2}
+      strokeWidth={1.8}
+      d="M8 10.5a6 6 0 005.5 5.5l1.4-1.4a1 1 0 011-.24 11 11 0 003.1.49 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 7a1 1 0 011-1h3.15a1 1 0 011 1 11 11 0 00.49 3.1 1 1 0 01-.24 1L8 10.5z"
+    />
+  </svg>
+);
+
+const ViewIcon = () => (
+  <svg
+    className="h-4 w-4"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={1.8}
       d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
     />
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeWidth={2}
+      strokeWidth={1.8}
       d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
     />
   </svg>
@@ -57,7 +67,7 @@ const ViewIcon = () => (
 
 const DownloadIcon = () => (
   <svg
-    className="h-5 w-5"
+    className="h-4 w-4"
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentColor"
@@ -65,7 +75,7 @@ const DownloadIcon = () => (
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeWidth={2}
+      strokeWidth={1.8}
       d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
     />
   </svg>
@@ -81,7 +91,7 @@ const EditIcon = () => (
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeWidth={2}
+      strokeWidth={1.8}
       d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
     />
   </svg>
@@ -97,7 +107,7 @@ const DeleteIcon = () => (
     <path
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeWidth={2}
+      strokeWidth={1.8}
       d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
     />
   </svg>
@@ -363,8 +373,135 @@ const Dashboard = () => {
         </div>
 
         {/* Jobs Table */}
+        <div className="md:hidden space-y-3 mb-6">
+          {filteredJobs.length === 0 ? (
+            <div
+              className={`rounded-xl border p-6 text-center ${
+                isDark
+                  ? "bg-gray-900/50 border-gray-700 text-gray-500"
+                  : "bg-white/80 border-gray-200 text-gray-500"
+              }`}
+            >
+              {searchTerm
+                ? "No jobs found matching your search"
+                : "No jobs yet"}
+            </div>
+          ) : (
+            filteredJobs.map((job) => (
+              <div
+                key={job._id}
+                className={`rounded-xl border p-4 ${
+                  isDark
+                    ? "bg-gray-900/50 border-gray-700"
+                    : "bg-white/80 border-gray-200"
+                }`}
+              >
+                <div className="flex items-start justify-between gap-2 mb-2">
+                  <div>
+                    <p className="text-sm font-mono text-cyan-500">
+                      {job.jobId}
+                    </p>
+                    <p
+                      className={`font-semibold ${isDark ? "text-white" : "text-gray-900"}`}
+                    >
+                      {job.customerName}
+                    </p>
+                  </div>
+                  {getStatusBadge(job.status)}
+                </div>
+                <div
+                  className={`text-xs space-y-1 mb-3 ${isDark ? "text-gray-300" : "text-gray-600"}`}
+                >
+                  <p>Phone: {job.customerPhone || "-"}</p>
+                  <p>Device: {job.deviceModel || "-"}</p>
+                  <p>Service: {getServiceLabel(job)}</p>
+                  <p>Price: PKR {(job.price || 0).toLocaleString()}</p>
+                </div>
+                <div className="grid grid-cols-2 gap-2 mb-2">
+                  <select
+                    value={job.status}
+                    onChange={(e) => handleStatusUpdate(job, e.target.value)}
+                    disabled={updatingJobId === job._id}
+                    className={`px-2 py-2 border rounded text-xs focus:outline-none focus:ring-2 focus:ring-cyan-500 disabled:opacity-50 ${
+                      isDark
+                        ? "bg-gray-800 border-gray-600 text-white"
+                        : "bg-gray-100 border-gray-200 text-gray-900"
+                    }`}
+                  >
+                    {STATUS_OPTIONS.map((status) => (
+                      <option key={status} value={status}>
+                        {status}
+                      </option>
+                    ))}
+                  </select>
+                  <select
+                    value={job.paymentStatus || "Pending"}
+                    onChange={(e) => handlePaymentUpdate(job, e.target.value)}
+                    disabled={updatingJobId === job._id}
+                    className={`px-2 py-2 border rounded text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-50 ${
+                      isDark
+                        ? "bg-gray-800 border-gray-600 text-white"
+                        : "bg-gray-100 border-gray-200 text-gray-900"
+                    }`}
+                  >
+                    {PAYMENT_STATUS_OPTIONS.map((paymentStatus) => (
+                      <option
+                        key={paymentStatus}
+                        value={paymentStatus}
+                        disabled={
+                          paymentStatus === "Paid" && job.status !== "Delivered"
+                        }
+                      >
+                        {paymentStatus}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <div className="mb-2">{getPaymentBadge(job.paymentStatus)}</div>
+                <div className="grid grid-cols-5 gap-2">
+                  <button
+                    onClick={() => handleWhatsApp(job)}
+                    className="h-9 w-9 flex items-center justify-center bg-green-600 hover:bg-green-700 text-white rounded-lg transition"
+                    title="Send WhatsApp"
+                  >
+                    <WhatsAppIcon />
+                  </button>
+                  <button
+                    onClick={() => handleViewReceipt(job)}
+                    className="h-9 w-9 flex items-center justify-center bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg transition"
+                    title="View Receipt"
+                  >
+                    <ViewIcon />
+                  </button>
+                  <button
+                    onClick={() => handleDownloadReceipt(job)}
+                    className="h-9 w-9 flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition"
+                    title="Download PDF"
+                  >
+                    <DownloadIcon />
+                  </button>
+                  <button
+                    onClick={() => handleEditClick(job)}
+                    className="h-9 w-9 flex items-center justify-center bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg transition"
+                    title="Edit Client"
+                  >
+                    <EditIcon />
+                  </button>
+                  <button
+                    onClick={() => handleDeleteClick(job)}
+                    className="h-9 w-9 flex items-center justify-center bg-red-600 hover:bg-red-700 text-white rounded-lg transition"
+                    title="Delete Client"
+                  >
+                    <DeleteIcon />
+                  </button>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+
         <div
-          className={`rounded-xl shadow-lg border overflow-hidden ${
+          className={`hidden md:block rounded-xl shadow-lg border overflow-hidden ${
             isDark
               ? "bg-gray-900/50 border-gray-700"
               : "bg-white/80 border-gray-200"
@@ -520,7 +657,7 @@ const Dashboard = () => {
                         {getStatusBadge(job.status)}
                       </td>
                       <td className="px-4 md:px-6 py-4">
-                        <div className="flex flex-wrap gap-1">
+                        <div className="flex flex-col gap-2 min-w-[210px]">
                           <select
                             value={job.status}
                             onChange={(e) =>
@@ -539,67 +676,71 @@ const Dashboard = () => {
                               </option>
                             ))}
                           </select>
-                          {getPaymentBadge(job.paymentStatus)}
-                          <select
-                            value={job.paymentStatus || "Pending"}
-                            onChange={(e) =>
-                              handlePaymentUpdate(job, e.target.value)
-                            }
-                            disabled={updatingJobId === job._id}
-                            className={`px-2 py-1 border rounded text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-50 cursor-pointer ${
-                              isDark
-                                ? "bg-gray-800 border-gray-600 text-white"
-                                : "bg-gray-100 border-gray-200 text-gray-900"
-                            }`}
-                          >
-                            {PAYMENT_STATUS_OPTIONS.map((paymentStatus) => (
-                              <option
-                                key={paymentStatus}
-                                value={paymentStatus}
-                                disabled={
-                                  paymentStatus === "Paid" &&
-                                  job.status !== "Delivered"
-                                }
-                              >
-                                {paymentStatus}
-                              </option>
-                            ))}
-                          </select>
-                          <button
-                            onClick={() => handleWhatsApp(job)}
-                            className="p-1.5 bg-green-600 hover:bg-green-700 text-white rounded transition"
-                            title="Send WhatsApp"
-                          >
-                            <WhatsAppIcon />
-                          </button>
-                          <button
-                            onClick={() => handleViewReceipt(job)}
-                            className="p-1.5 bg-cyan-600 hover:bg-cyan-700 text-white rounded transition"
-                            title="View Receipt"
-                          >
-                            <ViewIcon />
-                          </button>
-                          <button
-                            onClick={() => handleDownloadReceipt(job)}
-                            className="p-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded transition"
-                            title="Download PDF"
-                          >
-                            <DownloadIcon />
-                          </button>
-                          <button
-                            onClick={() => handleEditClick(job)}
-                            className="p-1.5 bg-yellow-600 hover:bg-yellow-700 text-white rounded transition"
-                            title="Edit Client"
-                          >
-                            <EditIcon />
-                          </button>
-                          <button
-                            onClick={() => handleDeleteClick(job)}
-                            className="p-1.5 bg-red-600 hover:bg-red-700 text-white rounded transition"
-                            title="Delete Client"
-                          >
-                            <DeleteIcon />
-                          </button>
+                          <div className="flex items-center gap-2">
+                            {getPaymentBadge(job.paymentStatus)}
+                            <select
+                              value={job.paymentStatus || "Pending"}
+                              onChange={(e) =>
+                                handlePaymentUpdate(job, e.target.value)
+                              }
+                              disabled={updatingJobId === job._id}
+                              className={`px-2 py-1 border rounded text-xs focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-50 cursor-pointer ${
+                                isDark
+                                  ? "bg-gray-800 border-gray-600 text-white"
+                                  : "bg-gray-100 border-gray-200 text-gray-900"
+                              }`}
+                            >
+                              {PAYMENT_STATUS_OPTIONS.map((paymentStatus) => (
+                                <option
+                                  key={paymentStatus}
+                                  value={paymentStatus}
+                                  disabled={
+                                    paymentStatus === "Paid" &&
+                                    job.status !== "Delivered"
+                                  }
+                                >
+                                  {paymentStatus}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                          <div className="flex flex-wrap gap-2">
+                            <button
+                              onClick={() => handleWhatsApp(job)}
+                              className="h-8 w-8 flex items-center justify-center bg-green-600 hover:bg-green-700 text-white rounded-lg transition"
+                              title="Send WhatsApp"
+                            >
+                              <WhatsAppIcon />
+                            </button>
+                            <button
+                              onClick={() => handleViewReceipt(job)}
+                              className="h-8 w-8 flex items-center justify-center bg-cyan-600 hover:bg-cyan-700 text-white rounded-lg transition"
+                              title="View Receipt"
+                            >
+                              <ViewIcon />
+                            </button>
+                            <button
+                              onClick={() => handleDownloadReceipt(job)}
+                              className="h-8 w-8 flex items-center justify-center bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition"
+                              title="Download PDF"
+                            >
+                              <DownloadIcon />
+                            </button>
+                            <button
+                              onClick={() => handleEditClick(job)}
+                              className="h-8 w-8 flex items-center justify-center bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg transition"
+                              title="Edit Client"
+                            >
+                              <EditIcon />
+                            </button>
+                            <button
+                              onClick={() => handleDeleteClick(job)}
+                              className="h-8 w-8 flex items-center justify-center bg-red-600 hover:bg-red-700 text-white rounded-lg transition"
+                              title="Delete Client"
+                            >
+                              <DeleteIcon />
+                            </button>
+                          </div>
                         </div>
                       </td>
                     </tr>
