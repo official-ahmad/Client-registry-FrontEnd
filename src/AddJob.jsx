@@ -14,6 +14,7 @@ const AddJob = () => {
     deviceModel: "",
     cnic: "",
     serviceType: "",
+    customService: "",
     price: "",
   });
 
@@ -29,6 +30,15 @@ const AddJob = () => {
       return;
     }
 
+    if (name === "serviceType") {
+      setFormData({
+        ...formData,
+        serviceType: value,
+        customService: value === "Other" ? formData.customService : "",
+      });
+      return;
+    }
+
     setFormData({ ...formData, [name]: value });
   };
 
@@ -40,10 +50,16 @@ const AddJob = () => {
       return;
     }
 
+    if (formData.serviceType === "Other" && !formData.customService.trim()) {
+      toast.error("Please enter a custom service name");
+      return;
+    }
+
     setLoading(true);
     try {
       const payload = {
         ...formData,
+        customService: formData.customService.trim(),
         price: formData.price ? parseFloat(formData.price) : 0,
       };
 
@@ -60,6 +76,7 @@ const AddJob = () => {
         deviceModel: "",
         cnic: "",
         serviceType: "",
+        customService: "",
         price: "",
       });
 
@@ -75,11 +92,15 @@ const AddJob = () => {
   return (
     <div className="min-h-screen p-4 sm:p-6 lg:p-8">
       <div className="max-w-4xl mx-auto">
-        <div className={`mb-6 sm:mb-8 ${isDark ? "text-white" : "text-slate-800"}`}>
+        <div
+          className={`mb-6 sm:mb-8 ${isDark ? "text-white" : "text-slate-800"}`}
+        >
           <h1 className="text-2xl sm:text-4xl font-black tracking-tight mb-2">
             Register New Client
           </h1>
-          <p className={`max-w-2xl ${isDark ? "text-gray-400" : "text-slate-600"}`}>
+          <p
+            className={`max-w-2xl ${isDark ? "text-gray-400" : "text-slate-600"}`}
+          >
             Create a new service request and issue a receipt against job ID.
           </p>
         </div>
@@ -87,17 +108,19 @@ const AddJob = () => {
         <form
           onSubmit={handleSubmit}
           className={`backdrop-blur rounded-3xl shadow-xl p-5 sm:p-7 lg:p-8 border ${
-            isDark 
-              ? "bg-gray-900/50 border-gray-700" 
+            isDark
+              ? "bg-gray-900/50 border-gray-700"
               : "bg-white/80 border-white"
           }`}
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Customer Name */}
             <div>
-              <label className={`block text-sm font-semibold mb-2 ${
-                isDark ? "text-gray-300" : "text-slate-700"
-              }`}>
+              <label
+                className={`block text-sm font-semibold mb-2 ${
+                  isDark ? "text-gray-300" : "text-slate-700"
+                }`}
+              >
                 Customer Name
               </label>
               <input
@@ -106,8 +129,8 @@ const AddJob = () => {
                 value={formData.customerName}
                 onChange={handleChange}
                 className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 transition ${
-                  isDark 
-                    ? "bg-gray-800 border-gray-600 text-white placeholder-gray-500" 
+                  isDark
+                    ? "bg-gray-800 border-gray-600 text-white placeholder-gray-500"
                     : "bg-white border-slate-200 text-slate-900 placeholder-slate-400"
                 }`}
                 placeholder="Enter customer name"
@@ -116,9 +139,11 @@ const AddJob = () => {
 
             {/* Customer Phone */}
             <div>
-              <label className={`block text-sm font-semibold mb-2 ${
-                isDark ? "text-gray-300" : "text-slate-700"
-              }`}>
+              <label
+                className={`block text-sm font-semibold mb-2 ${
+                  isDark ? "text-gray-300" : "text-slate-700"
+                }`}
+              >
                 Phone Number
               </label>
               <input
@@ -127,8 +152,8 @@ const AddJob = () => {
                 value={formData.customerPhone}
                 onChange={handleChange}
                 className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 transition ${
-                  isDark 
-                    ? "bg-gray-800 border-gray-600 text-white placeholder-gray-500" 
+                  isDark
+                    ? "bg-gray-800 border-gray-600 text-white placeholder-gray-500"
                     : "bg-white border-slate-200 text-slate-900 placeholder-slate-400"
                 }`}
                 placeholder="03001234567"
@@ -137,9 +162,11 @@ const AddJob = () => {
 
             {/* Device Model */}
             <div>
-              <label className={`block text-sm font-semibold mb-2 ${
-                isDark ? "text-gray-300" : "text-slate-700"
-              }`}>
+              <label
+                className={`block text-sm font-semibold mb-2 ${
+                  isDark ? "text-gray-300" : "text-slate-700"
+                }`}
+              >
                 Device Model
               </label>
               <input
@@ -148,8 +175,8 @@ const AddJob = () => {
                 value={formData.deviceModel}
                 onChange={handleChange}
                 className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 transition ${
-                  isDark 
-                    ? "bg-gray-800 border-gray-600 text-white placeholder-gray-500" 
+                  isDark
+                    ? "bg-gray-800 border-gray-600 text-white placeholder-gray-500"
                     : "bg-white border-slate-200 text-slate-900 placeholder-slate-400"
                 }`}
                 placeholder="Samsung Galaxy S21"
@@ -158,9 +185,11 @@ const AddJob = () => {
 
             {/* CNIC */}
             <div>
-              <label className={`block text-sm font-semibold mb-2 ${
-                isDark ? "text-gray-300" : "text-slate-700"
-              }`}>
+              <label
+                className={`block text-sm font-semibold mb-2 ${
+                  isDark ? "text-gray-300" : "text-slate-700"
+                }`}
+              >
                 CNIC (13 digits)
               </label>
               <input
@@ -170,22 +199,26 @@ const AddJob = () => {
                 onChange={handleChange}
                 maxLength={13}
                 className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 transition ${
-                  isDark 
-                    ? "bg-gray-800 border-gray-600 text-white placeholder-gray-500" 
+                  isDark
+                    ? "bg-gray-800 border-gray-600 text-white placeholder-gray-500"
                     : "bg-white border-slate-200 text-slate-900 placeholder-slate-400"
                 }`}
                 placeholder="3520212345671"
               />
-              <p className={`mt-1 text-xs ${isDark ? "text-gray-500" : "text-slate-500"}`}>
+              <p
+                className={`mt-1 text-xs ${isDark ? "text-gray-500" : "text-slate-500"}`}
+              >
                 {formData.cnic.length}/13 digits
               </p>
             </div>
 
             {/* Service Type */}
             <div>
-              <label className={`block text-sm font-semibold mb-2 ${
-                isDark ? "text-gray-300" : "text-slate-700"
-              }`}>
+              <label
+                className={`block text-sm font-semibold mb-2 ${
+                  isDark ? "text-gray-300" : "text-slate-700"
+                }`}
+              >
                 Service Type
               </label>
               <select
@@ -193,8 +226,8 @@ const AddJob = () => {
                 value={formData.serviceType}
                 onChange={handleChange}
                 className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 transition ${
-                  isDark 
-                    ? "bg-gray-800 border-gray-600 text-white" 
+                  isDark
+                    ? "bg-gray-800 border-gray-600 text-white"
                     : "bg-white border-slate-200 text-slate-900"
                 }`}
               >
@@ -202,14 +235,41 @@ const AddJob = () => {
                 <option value="FRP">FRP</option>
                 <option value="Screen Lock">Screen Lock</option>
                 <option value="Software">Software</option>
+                <option value="Other">Other</option>
               </select>
             </div>
 
+            {formData.serviceType === "Other" && (
+              <div className="md:col-span-2">
+                <label
+                  className={`block text-sm font-semibold mb-2 ${
+                    isDark ? "text-gray-300" : "text-slate-700"
+                  }`}
+                >
+                  Other Service
+                </label>
+                <input
+                  type="text"
+                  name="customService"
+                  value={formData.customService}
+                  onChange={handleChange}
+                  className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 transition ${
+                    isDark
+                      ? "bg-gray-800 border-gray-600 text-white placeholder-gray-500"
+                      : "bg-white border-slate-200 text-slate-900 placeholder-slate-400"
+                  }`}
+                  placeholder="Enter custom service"
+                />
+              </div>
+            )}
+
             {/* Price */}
             <div>
-              <label className={`block text-sm font-semibold mb-2 ${
-                isDark ? "text-gray-300" : "text-slate-700"
-              }`}>
+              <label
+                className={`block text-sm font-semibold mb-2 ${
+                  isDark ? "text-gray-300" : "text-slate-700"
+                }`}
+              >
                 Price (PKR)
               </label>
               <input
@@ -220,8 +280,8 @@ const AddJob = () => {
                 min="0"
                 step="0.01"
                 className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 transition ${
-                  isDark 
-                    ? "bg-gray-800 border-gray-600 text-white placeholder-gray-500" 
+                  isDark
+                    ? "bg-gray-800 border-gray-600 text-white placeholder-gray-500"
                     : "bg-white border-slate-200 text-slate-900 placeholder-slate-400"
                 }`}
                 placeholder="2500"

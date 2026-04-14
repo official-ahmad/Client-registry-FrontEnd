@@ -1,21 +1,35 @@
 // Utility functions for WhatsApp and Receipt generation
 
+export const getServiceLabel = (job) => {
+  if (!job) return "N/A";
+
+  if (job.serviceType === "Other") {
+    return job.customService?.trim() || "Other";
+  }
+
+  return job.serviceType || "N/A";
+};
+
 export const sendWhatsApp = (phone, message) => {
   // Remove non-numeric characters from phone
-  const cleanPhone = phone.replace(/\D/g, '');
-  
+  const cleanPhone = phone.replace(/\D/g, "");
+
   // Format for WhatsApp (add country code if not present)
-  const formattedPhone = cleanPhone.startsWith('92') ? cleanPhone : `92${cleanPhone.replace(/^0/, '')}`;
-  
+  const formattedPhone = cleanPhone.startsWith("92")
+    ? cleanPhone
+    : `92${cleanPhone.replace(/^0/, "")}`;
+
   // Create WhatsApp URL
   const encodedMessage = encodeURIComponent(message);
   const whatsappUrl = `https://wa.me/${formattedPhone}?text=${encodedMessage}`;
-  
+
   // Open in new window
-  window.open(whatsappUrl, '_blank');
+  window.open(whatsappUrl, "_blank");
 };
 
 export const formatWhatsAppMessage = (job) => {
+  const paymentStatus = job.paymentStatus || "Pending";
+
   return `*Official-Ahmad Digital Services*
 
 Dear ${job.customerName},
@@ -24,14 +38,15 @@ Your job details:
 ━━━━━━━━━━━━━━━
 🆔 Job ID: *${job.jobId}*
 📱 Device: ${job.deviceModel}
-🔧 Service: ${job.serviceType}
+🔧 Service: ${getServiceLabel(job)}
 📊 Status: *${job.status}*
+💳 Payment: *${paymentStatus}*
 💰 Price: PKR ${job.price.toLocaleString()}
 ━━━━━━━━━━━━━━━
 
-${job.status === 'Ready' ? '✅ Your device is ready for pickup!' : ''}
-${job.status === 'In-Progress' ? '⏳ We are working on your device.' : ''}
-${job.status === 'Received' ? '📥 We have received your device.' : ''}
+${job.status === "Ready" ? "✅ Your device is ready for pickup!" : ""}
+${job.status === "In-Progress" ? "⏳ We are working on your device." : ""}
+${job.status === "Received" ? "📥 We have received your device." : ""}
 
 For any queries, please contact us.
 
@@ -39,6 +54,9 @@ Thank you for choosing Official-Ahmad!`;
 };
 
 const getReceiptHTML = (job, forPrint = false) => {
+  const serviceLabel = getServiceLabel(job);
+  const paymentStatus = job.paymentStatus || "Pending";
+
   return `
 <!DOCTYPE html>
 <html>
@@ -156,6 +174,16 @@ const getReceiptHTML = (job, forPrint = false) => {
     .status-in-progress { background: #fef3c7; color: #d97706; }
     .status-ready { background: #dcfce7; color: #16a34a; }
     .status-delivered { background: #dbeafe; color: #2563eb; }
+    .payment-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .payment-pending { background: #fef3c7; color: #b45309; }
+    .payment-paid { background: #dcfce7; color: #15803d; }
     .footer {
       text-align: center;
       margin-top: 15px;
@@ -216,11 +244,11 @@ const getReceiptHTML = (job, forPrint = false) => {
       <div class="section-title">Receipt Details</div>
       <div class="row">
         <span class="label">Date</span>
-        <span class="value">${new Date(job.receivedAt).toLocaleDateString('en-GB')}</span>
+        <span class="value">${new Date(job.receivedAt).toLocaleDateString("en-GB")}</span>
       </div>
       <div class="row">
         <span class="label">Time</span>
-        <span class="value">${new Date(job.receivedAt).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' })}</span>
+        <span class="value">${new Date(job.receivedAt).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" })}</span>
       </div>
     </div>
 
@@ -228,15 +256,15 @@ const getReceiptHTML = (job, forPrint = false) => {
       <div class="section-title">Customer Info</div>
       <div class="row">
         <span class="label">Name</span>
-        <span class="value">${job.customerName || 'N/A'}</span>
+        <span class="value">${job.customerName || "N/A"}</span>
       </div>
       <div class="row">
         <span class="label">Phone</span>
-        <span class="value">${job.customerPhone || 'N/A'}</span>
+        <span class="value">${job.customerPhone || "N/A"}</span>
       </div>
       <div class="row">
         <span class="label">CNIC</span>
-        <span class="value">${job.cnic || 'N/A'}</span>
+        <span class="value">${job.cnic || "N/A"}</span>
       </div>
     </div>
 
@@ -244,16 +272,22 @@ const getReceiptHTML = (job, forPrint = false) => {
       <div class="section-title">Device Info</div>
       <div class="row">
         <span class="label">Model</span>
-        <span class="value">${job.deviceModel || 'N/A'}</span>
+        <span class="value">${job.deviceModel || "N/A"}</span>
       </div>
       <div class="row">
         <span class="label">Service</span>
-        <span class="value">${job.serviceType || 'N/A'}</span>
+        <span class="value">${serviceLabel}</span>
       </div>
       <div class="row">
         <span class="label">Status</span>
         <span class="value">
-          <span class="status-badge status-${job.status.toLowerCase().replace('-', '-')}">${job.status}</span>
+          <span class="status-badge status-${job.status.toLowerCase().replace("-", "-")}">${job.status}</span>
+        </span>
+      </div>
+      <div class="row">
+        <span class="label">Payment</span>
+        <span class="value">
+          <span class="payment-badge payment-${paymentStatus.toLowerCase()}">${paymentStatus}</span>
         </span>
       </div>
     </div>
@@ -273,20 +307,28 @@ const getReceiptHTML = (job, forPrint = false) => {
     </div>
   </div>
   
-  ${!forPrint ? `
+  ${
+    !forPrint
+      ? `
   <div class="actions no-print">
     <button class="btn btn-print" onclick="window.print()">🖨️ Print</button>
     <button class="btn btn-close" onclick="window.close()">✕ Close</button>
   </div>
-  ` : ''}
+  `
+      : ""
+  }
   
-  ${forPrint ? `
+  ${
+    forPrint
+      ? `
   <script>
     window.onload = function() {
       window.print();
     };
   </script>
-  ` : ''}
+  `
+      : ""
+  }
 </body>
 </html>
   `;
@@ -294,14 +336,14 @@ const getReceiptHTML = (job, forPrint = false) => {
 
 // View receipt in new window (responsive, no auto-print)
 export const viewReceipt = (job) => {
-  const receiptWindow = window.open('', '_blank', 'width=400,height=700');
+  const receiptWindow = window.open("", "_blank", "width=400,height=700");
   receiptWindow.document.write(getReceiptHTML(job, false));
   receiptWindow.document.close();
 };
 
 // Download/Print receipt (triggers print dialog which can save as PDF)
 export const downloadReceipt = (job) => {
-  const receiptWindow = window.open('', '_blank', 'width=400,height=700');
+  const receiptWindow = window.open("", "_blank", "width=400,height=700");
   receiptWindow.document.write(getReceiptHTML(job, true));
   receiptWindow.document.close();
 };

@@ -206,7 +206,7 @@ const Sidebar = () => {
               <h1 className={`text-xl font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
                 Official-Ahmad
               </h1>
-              <p className={`text-xs ${isDark ? "text-gray-400" : "text-slate-500"}`}>Digital Services</p>
+              <p className={`text-xs ${isDark ? "text-gray-400" : "text-slate-500"}`}>Digital Servicesw</p>
             </div>
           </div>
         </div>
