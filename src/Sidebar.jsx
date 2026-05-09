@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useTheme } from "./ThemeContext";
+import { getAuthUser } from "./auth";
 
 // Simple SVG Icons
 const HomeIcon = () => (
@@ -131,9 +132,10 @@ const SunIcon = () => (
   </svg>
 );
 
-const Sidebar = () => {
+const Sidebar = ({ onLogout }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isDark, toggleTheme } = useTheme();
+  const authUser = getAuthUser();
 
   const navItems = [
     { name: "All Jobs", path: "/dashboard", Icon: HomeIcon },
@@ -146,28 +148,36 @@ const Sidebar = () => {
   return (
     <>
       {/* Mobile Header */}
-      <div className={`lg:hidden fixed top-0 left-0 right-0 z-50 backdrop-blur border-b transition-colors duration-200 ${
-        isDark 
-          ? "bg-gray-900/95 border-gray-700" 
-          : "bg-white/95 border-slate-200"
-      }`}>
+      <div
+        className={`lg:hidden fixed top-0 left-0 right-0 z-50 backdrop-blur border-b transition-colors duration-200 ${
+          isDark
+            ? "bg-gray-900/95 border-gray-700"
+            : "bg-white/95 border-slate-200"
+        }`}
+      >
         <div className="flex items-center justify-between p-4">
           <div className="flex items-center space-x-3">
             <div className="text-cyan-500">
               <WrenchIcon />
             </div>
             <div>
-              <h1 className={`text-lg font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
+              <h1
+                className={`text-lg font-bold ${isDark ? "text-white" : "text-slate-900"}`}
+              >
                 Official-Ahmad
               </h1>
-              <p className={`text-xs ${isDark ? "text-gray-400" : "text-slate-500"}`}>Digital Services</p>
+              <p
+                className={`text-xs ${isDark ? "text-gray-400" : "text-slate-500"}`}
+              >
+                Digital Services
+              </p>
             </div>
           </div>
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             className={`p-2 rounded-lg transition ${
-              isDark 
-                ? "text-gray-300 hover:bg-gray-800" 
+              isDark
+                ? "text-gray-300 hover:bg-gray-800"
                 : "text-slate-700 hover:bg-slate-100"
             }`}
           >
@@ -191,22 +201,30 @@ const Sidebar = () => {
             ? "translate-x-0"
             : "-translate-x-full lg:translate-x-0"
         } ${
-          isDark 
-            ? "bg-gray-900/95 border-r border-gray-700 text-white" 
+          isDark
+            ? "bg-gray-900/95 border-r border-gray-700 text-white"
             : "bg-white/95 border-r border-slate-200 text-slate-900"
         }`}
       >
         {/* Logo/Header - Hidden on mobile (shown in mobile header instead) */}
-        <div className={`hidden lg:block p-6 border-b ${isDark ? "border-gray-700" : "border-slate-200"}`}>
+        <div
+          className={`hidden lg:block p-6 border-b ${isDark ? "border-gray-700" : "border-slate-200"}`}
+        >
           <div className="flex items-center space-x-3">
             <div className="text-cyan-500">
               <WrenchIcon />
             </div>
             <div>
-              <h1 className={`text-xl font-bold ${isDark ? "text-white" : "text-slate-900"}`}>
+              <h1
+                className={`text-xl font-bold ${isDark ? "text-white" : "text-slate-900"}`}
+              >
                 Official-Ahmad
               </h1>
-              <p className={`text-xs ${isDark ? "text-gray-400" : "text-slate-500"}`}>Digital Servicesw</p>
+              <p
+                className={`text-xs ${isDark ? "text-gray-400" : "text-slate-500"}`}
+              >
+                Digital Servicesw
+              </p>
             </div>
           </div>
         </div>
@@ -221,8 +239,8 @@ const Sidebar = () => {
               className={({ isActive }) =>
                 `flex items-center space-x-3 px-4 py-3 rounded-lg transition-all duration-200 ${
                   isActive
-                    ? isDark 
-                      ? "bg-cyan-600 text-white shadow-lg shadow-cyan-500/25" 
+                    ? isDark
+                      ? "bg-cyan-600 text-white shadow-lg shadow-cyan-500/25"
                       : "bg-slate-900 text-white shadow-lg"
                     : isDark
                       ? "text-gray-300 hover:bg-gray-800 hover:text-white"
@@ -237,12 +255,14 @@ const Sidebar = () => {
         </nav>
 
         {/* Theme Toggle */}
-        <div className={`p-4 border-t ${isDark ? "border-gray-700" : "border-slate-200"}`}>
+        <div
+          className={`p-4 border-t ${isDark ? "border-gray-700" : "border-slate-200"}`}
+        >
           <button
             onClick={toggleTheme}
             className={`w-full flex items-center justify-between px-4 py-3 rounded-lg transition ${
-              isDark 
-                ? "bg-gray-800 hover:bg-gray-700 text-white" 
+              isDark
+                ? "bg-gray-800 hover:bg-gray-700 text-white"
                 : "bg-slate-100 hover:bg-slate-200 text-slate-900"
             }`}
           >
@@ -255,8 +275,34 @@ const Sidebar = () => {
         </div>
 
         {/* Footer */}
-        <div className={`p-4 border-t ${isDark ? "border-gray-700" : "border-slate-200"}`}>
-          <p className={`text-xs text-center ${isDark ? "text-gray-500" : "text-slate-500"}`}>
+        <div
+          className={`p-4 border-t ${isDark ? "border-gray-700" : "border-slate-200"}`}
+        >
+          <div
+            className={`mb-3 rounded-2xl border px-4 py-3 text-sm ${
+              isDark
+                ? "border-gray-700 bg-gray-800/70 text-gray-200"
+                : "border-slate-200 bg-slate-50 text-slate-700"
+            }`}
+          >
+            <p className="font-semibold">Logged in as</p>
+            <p className="truncate text-xs opacity-80">{authUser || "Admin"}</p>
+          </div>
+
+          <button
+            onClick={onLogout}
+            className={`mb-3 w-full rounded-lg border px-4 py-3 font-semibold transition ${
+              isDark
+                ? "border-rose-500/30 bg-rose-500/10 text-rose-200 hover:bg-rose-500/20"
+                : "border-rose-200 bg-rose-50 text-rose-700 hover:bg-rose-100"
+            }`}
+          >
+            Logout
+          </button>
+
+          <p
+            className={`text-xs text-center ${isDark ? "text-gray-500" : "text-slate-500"}`}
+          >
             © 2026 Official-Ahmad
           </p>
         </div>
