@@ -28,7 +28,7 @@ const LoginPage = ({ onLoginSuccess }) => {
       toast.success("Login successful");
     } catch (error) {
       toast.error(
-        error.response?.data?.error || "Invalid credentials, dobara try karein",
+        error.response?.data?.error || "Invalid credentials, Try again! ",
       );
     } finally {
       setLoading(false);
@@ -46,7 +46,7 @@ const LoginPage = ({ onLoginSuccess }) => {
             Admin Login
           </h1>
           <p className="mt-2 text-sm text-slate-400">
-            Sirf authorized access ke liye dashboard unlock karein.
+            Official-Ahmad Only!
           </p>
         </div>
 
