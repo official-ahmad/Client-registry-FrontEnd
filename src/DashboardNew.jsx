@@ -242,6 +242,7 @@ const Dashboard = () => {
       price: job.price || 0,
       status: job.status || "Received",
       paymentStatus: job.paymentStatus || "Pending",
+      paymentMethod: job.paymentMethod || "Cash",
     });
   };
 
@@ -416,6 +417,7 @@ const Dashboard = () => {
                   <p>Device: {job.deviceModel || "-"}</p>
                   <p>Service: {getServiceLabel(job)}</p>
                   <p>Price: PKR {(job.price || 0).toLocaleString()}</p>
+                  <p className={`font-semibold ${isDark ? "text-cyan-400" : "text-cyan-600"}`}>Payment: {job.paymentMethod || "Cash"}</p>
                 </div>
                 <div className="grid grid-cols-2 gap-2 mb-2">
                   <select
@@ -704,6 +706,9 @@ const Dashboard = () => {
                               ))}
                             </select>
                           </div>
+                          <div className={`text-xs font-medium ${isDark ? "text-cyan-400" : "text-cyan-600"}`}>
+                            {job.paymentMethod || "Cash"}
+                          </div>
                           <div className="flex flex-wrap gap-2">
                             <button
                               onClick={() => handleWhatsApp(job)}
@@ -941,6 +946,29 @@ const Dashboard = () => {
                     >
                       Paid
                     </option>
+                  </select>
+                </div>
+                <div>
+                  <label
+                    className={`block text-sm font-medium mb-1 ${isDark ? "text-gray-300" : "text-gray-700"}`}
+                  >
+                    Payment Method
+                  </label>
+                  <select
+                    value={editFormData.paymentMethod || "Cash"}
+                    onChange={(e) =>
+                      setEditFormData({
+                        ...editFormData,
+                        paymentMethod: e.target.value,
+                      })
+                    }
+                    className={`w-full px-3 py-2 rounded-lg border ${isDark ? "bg-gray-800 border-gray-600 text-white" : "bg-white border-gray-300 text-gray-900"}`}
+                  >
+                    <option value="Cash">Cash</option>
+                    <option value="JazzCash">JazzCash</option>
+                    <option value="Easypaisa">Easypaisa</option>
+                    <option value="Bank Transfer">Bank Transfer</option>
+                    <option value="Other">Other</option>
                   </select>
                 </div>
               </div>

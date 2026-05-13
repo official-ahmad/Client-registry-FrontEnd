@@ -16,6 +16,7 @@ const AddJob = () => {
     serviceType: "",
     customService: "",
     price: "",
+    paymentMethod: "Cash",
   });
 
   const handleChange = (e) => {
@@ -84,6 +85,7 @@ const AddJob = () => {
         serviceType: "",
         customService: "",
         price: "",
+        paymentMethod: "Cash",
       });
 
       // Navigate to dashboard after short delay
@@ -292,6 +294,33 @@ const AddJob = () => {
                 }`}
                 placeholder="2500"
               />
+            </div>
+
+            {/* Payment Method */}
+            <div>
+              <label
+                className={`block text-sm font-semibold mb-2 ${
+                  isDark ? "text-gray-300" : "text-slate-700"
+                }`}
+              >
+                Payment Method
+              </label>
+              <select
+                name="paymentMethod"
+                value={formData.paymentMethod}
+                onChange={handleChange}
+                className={`w-full px-4 py-3 border rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 transition ${
+                  isDark
+                    ? "bg-gray-800 border-gray-600 text-white"
+                    : "bg-white border-slate-200 text-slate-900"
+                }`}
+              >
+                <option value="Cash">Cash</option>
+                <option value="JazzCash">JazzCash</option>
+                <option value="Easypaisa">Easypaisa</option>
+                <option value="Bank Transfer">Bank Transfer</option>
+                <option value="Other">Other</option>
+              </select>
             </div>
           </div>
 

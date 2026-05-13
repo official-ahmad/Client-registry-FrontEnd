@@ -349,6 +349,18 @@ const ClientSearch = () => {
                       {clientDetails.paymentStatus || "Pending"}
                     </p>
                   </div>
+                  <div>
+                    <label
+                      className={`text-sm font-semibold ${isDark ? "text-gray-400" : "text-slate-600"}`}
+                    >
+                      Payment Method
+                    </label>
+                    <p
+                      className={`text-base font-semibold ${isDark ? "text-cyan-300" : "text-cyan-600"}`}
+                    >
+                      {clientDetails.paymentMethod || "Cash"}
+                    </p>
+                  </div>
                   {clientDetails.paidAt && (
                     <div>
                       <label
