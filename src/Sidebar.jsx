@@ -52,6 +52,22 @@ const RevenueIcon = () => (
   </svg>
 );
 
+const SearchIcon = () => (
+  <svg
+    className="h-5 w-5"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+    />
+  </svg>
+);
+
 const WrenchIcon = () => (
   <svg
     className="h-8 w-8"
@@ -140,6 +156,7 @@ const Sidebar = ({ onLogout }) => {
   const navItems = [
     { name: "All Jobs", path: "/dashboard", Icon: HomeIcon },
     { name: "Add New Job", path: "/add", Icon: PlusIcon },
+    { name: "Search Client", path: "/search", Icon: SearchIcon },
     { name: "Revenue", path: "/revenue", Icon: RevenueIcon },
   ];
 

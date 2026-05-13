@@ -45,9 +45,7 @@ const LoginPage = ({ onLoginSuccess }) => {
           <h1 className="text-3xl font-black tracking-tight text-white">
             Admin Login
           </h1>
-          <p className="mt-2 text-sm text-slate-400">
-            Official-Ahmad Only!
-          </p>
+          <p className="mt-2 text-sm text-slate-400">Administrator Access</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">

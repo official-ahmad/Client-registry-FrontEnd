@@ -11,6 +11,7 @@ import Sidebar from "./Sidebar";
 import Dashboard from "./DashboardNew";
 import AddJob from "./AddJob";
 import Revenue from "./Revenue";
+import ClientSearch from "./ClientSearch";
 import LoginPage from "./LoginPage";
 import { clearAuthSession, isAuthenticated as hasStoredSession } from "./auth";
 import toast from "react-hot-toast";
@@ -25,6 +26,7 @@ function ProtectedShell({ onLogout }) {
           <Route path="/" element={<Navigate to="/dashboard" replace />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/add" element={<AddJob />} />
+          <Route path="/search" element={<ClientSearch />} />
           <Route path="/revenue" element={<Revenue />} />
           <Route path="*" element={<Navigate to="/dashboard" replace />} />
         </Routes>

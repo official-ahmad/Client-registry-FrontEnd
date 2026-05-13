@@ -55,12 +55,18 @@ const AddJob = () => {
       return;
     }
 
+    const price = formData.price ? parseFloat(formData.price) : 0;
+    if (isNaN(price) || price < 0) {
+      toast.error("Please enter a valid price");
+      return;
+    }
+
     setLoading(true);
     try {
       const payload = {
         ...formData,
         customService: formData.customService.trim(),
-        price: formData.price ? parseFloat(formData.price) : 0,
+        price,
       };
 
       await jobService.createJob({
