@@ -58,14 +58,11 @@ export const jobService = {
     const response = await api.delete(`/jobs/${id}`);
     return response.data;
   },
-
-  // Track job by jobId
   trackJob: async (jobId) => {
     const response = await api.get(`/jobs/track/${jobId}`);
     return response.data;
   },
 
-  // Fetch receipt data by mongo id or job id
   getReceipt: async (id) => {
     const response = await api.get(`/jobs/${id}/receipt`);
     return response.data;
